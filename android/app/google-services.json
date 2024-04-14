@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "205815946399",
+    "project_id": "stuwise-d0a47",
+    "storage_bucket": "stuwise-d0a47.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:205815946399:android:924e527e1f60f1abc816aa",
+        "android_client_info": {
+          "package_name": "com.example.stuwise"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBmfO4QePBvxNe1E1kbmB9LGJ-OUqSRG44"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
