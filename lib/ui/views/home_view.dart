@@ -81,18 +81,7 @@ class _HomeViewState extends State<HomeView> {
           ),
         ),
       ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: () {
-          Navigator.push(context,
-              MaterialPageRoute(builder: (context) => const LoanCalcView()));
-        },
-        shape: const CircleBorder(),
-        backgroundColor: AppColors.kPrimaryColor.withOpacity(0.7),
-        child: const Icon(
-          Icons.add,
-          color: AppColors.kWhiteColor,
-        ),
-      ),
+      
     );
   }
 }

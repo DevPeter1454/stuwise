@@ -55,8 +55,8 @@ class BottomNavView extends StatelessWidget {
 List<Widget> _buildScreens() {
   return [
     const HomeView(),
-    const DebtsView(),
     const StrategyView(),
+    const DebtsView(),
     const LearnView(),
     const SettingsView()
   ];
@@ -71,14 +71,14 @@ List<PersistentBottomNavBarItem> _navBarsItems() {
       inactiveColorPrimary: CupertinoColors.systemGrey,
     ),
     PersistentBottomNavBarItem(
-      icon: const Icon(Icons.wallet),
-      title: ("Debts"),
+      icon: const Icon(CupertinoIcons.lightbulb),
+      title: ("Strategy"),
       activeColorPrimary: AppColors.kPrimaryColor,
       inactiveColorPrimary: CupertinoColors.systemGrey,
     ),
     PersistentBottomNavBarItem(
-      icon: const Icon(CupertinoIcons.lightbulb),
-      title: ("Strategy"),
+      icon: const Icon(Icons.wallet),
+      title: ("Debts"),
       activeColorPrimary: AppColors.kPrimaryColor,
       inactiveColorPrimary: CupertinoColors.systemGrey,
     ),
