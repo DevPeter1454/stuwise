@@ -12,7 +12,7 @@ class LearnView extends StatefulWidget {
 
 class _LearnViewState extends State<LearnView> {
   final List<String> _topicsList = [
-    "12 tips to increase your credit score",
+    "Tips to increase your credit score",
     "Difference between good and bad credit",
     "Effective Debt Management",
     "Budgeting Basics",

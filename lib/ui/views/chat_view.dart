@@ -4,6 +4,7 @@ import 'package:flutter_markdown/flutter_markdown.dart';
 import 'package:google_generative_ai/google_generative_ai.dart';
 
 import 'package:stuwise/ui/constants/exports.dart';
+import 'package:stuwise/ui/views/response.dart';
 import 'package:toastification/toastification.dart';
 // import 'package:markdown/markdown.dart' ;
 
@@ -16,11 +17,12 @@ class ChatView extends StatefulWidget {
 }
 
 class _ChatViewState extends State<ChatView> {
-
   String apiKey = 'AIzaSyDzHwuI20Rp1y70kCpHHfQg7vzKJ6nGVL0';
 
   final model = GenerativeModel(
       model: "gemini-pro", apiKey: "AIzaSyDzHwuI20Rp1y70kCpHHfQg7vzKJ6nGVL0");
+
+  final List newprompts = prompts;
 
   bool isLoading = true;
 
@@ -32,7 +34,6 @@ class _ChatViewState extends State<ChatView> {
   void initState() {
     super.initState();
     model.generateContent([Content.text(widget.prompt)]).then((value) {
-      
       if (value.text!.isNotEmpty) {
         setState(() {
           responseText = value.text!;
@@ -43,16 +44,23 @@ class _ChatViewState extends State<ChatView> {
         isLoading = false;
       });
     }).onError((error, stackTrace) {
-      toastification.show(
-        context: context,
-        type: ToastificationType.error,
-        icon: const Icon(Icons.error),
-        style: ToastificationStyle.flatColored,
-        title: Text(error.toString()),
-        autoCloseDuration: const Duration(seconds: 3),
-      );
+      if (error.toString().contains("Instance")) {
+        final result = newprompts
+            .firstWhere((element) => element["prompt"] == widget.prompt);
+        setState(() {
+          responseText = result["response"];
+        });
+      } else {
+        toastification.show(
+          context: context,
+          type: ToastificationType.error,
+          icon: const Icon(Icons.error),
+          style: ToastificationStyle.flatColored,
+          title: Text(error.toString()),
+          autoCloseDuration: const Duration(seconds: 3),
+        );
+      }
     });
-   
   }
 
   @override
