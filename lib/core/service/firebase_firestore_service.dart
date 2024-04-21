@@ -70,19 +70,18 @@ class FirebaseFireStoreService {
       );
     }
   }
-  
-  Stream<QuerySnapshot<Map<String, dynamic>>> getUserLoanList()  {
 
-       return _firebaseFirestore
-          .collection("users")
-          .doc(currentUser!.uid)
-          .collection("loans")
-          .orderBy('createdAt', descending: true)
-          .snapshots();
-    
-    }
+  Stream<QuerySnapshot<Map<String, dynamic>>> getUserLoanList() {
+    return _firebaseFirestore
+        .collection("users")
+        .doc(currentUser!.uid)
+        .collection("loans")
+        .orderBy('createdAt', descending: true)
+        .snapshots();
+  }
 
-  Future<dynamic> saveNewLoan(Loan loan, BuildContext context, String name) async {
+  Future<dynamic> saveNewLoan(
+      Loan loan, BuildContext context, String name) async {
     try {
       final loanDetails = <String, dynamic>{
         "ownerId": currentUser!.uid,
@@ -96,7 +95,6 @@ class FirebaseFireStoreService {
         "totalInterestPaid":
             loan.generateAmortizationSchedule().toMap()["totalInterestPaid"],
         "createdAt": FieldValue.serverTimestamp(),
-
       };
       final result = await _firebaseFirestore
           .collection("users")
@@ -126,6 +124,32 @@ class FirebaseFireStoreService {
     }
   }
 
- 
-  
+  Future deleteSingleLoanItem(BuildContext context, String loanId) async {
+    try {
+      _firebaseFirestore
+          .collection("users")
+          .doc(currentUser!.uid)
+          .collection("loans")
+          .doc(loanId)
+          .delete()
+          .whenComplete(() {
+        toastification.show(
+            context: context,
+            type: ToastificationType.success,
+            icon: const Icon(Icons.error),
+            style: ToastificationStyle.flatColored,
+            title: const Text("Loan deleted successfully"),
+            autoCloseDuration: const Duration(seconds: 3));
+      });
+    } on FirebaseException catch (e) {
+      toastification.show(
+        context: context,
+        type: ToastificationType.error,
+        icon: const Icon(Icons.error),
+        style: ToastificationStyle.flatColored,
+        title: Text(e.message!),
+        autoCloseDuration: const Duration(seconds: 3),
+      );
+    }
+  }
 }

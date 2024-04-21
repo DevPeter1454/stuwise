@@ -1,9 +1,8 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
-import 'package:flutter_gemini/flutter_gemini.dart';
+
 import 'package:flutter_markdown/flutter_markdown.dart';
-import 'package:stuwise/ui/constants/colors.dart';
+import 'package:google_generative_ai/google_generative_ai.dart';
+
 import 'package:stuwise/ui/constants/exports.dart';
 import 'package:toastification/toastification.dart';
 // import 'package:markdown/markdown.dart' ;
@@ -17,7 +16,11 @@ class ChatView extends StatefulWidget {
 }
 
 class _ChatViewState extends State<ChatView> {
-  final gemini = Gemini.instance;
+
+  String apiKey = 'AIzaSyDzHwuI20Rp1y70kCpHHfQg7vzKJ6nGVL0';
+
+  final model = GenerativeModel(
+      model: "gemini-pro", apiKey: "AIzaSyDzHwuI20Rp1y70kCpHHfQg7vzKJ6nGVL0");
 
   bool isLoading = true;
 
@@ -28,12 +31,12 @@ class _ChatViewState extends State<ChatView> {
   @override
   void initState() {
     super.initState();
-    gemini.text(widget.prompt).then((value) {
-      if (value != null) {
+    model.generateContent([Content.text(widget.prompt)]).then((value) {
+      
+      if (value.text!.isNotEmpty) {
         setState(() {
-          responseText = value.content!.parts!.first.text!;
+          responseText = value.text!;
         });
-        print(responseText);
       }
     }).whenComplete(() {
       setState(() {
@@ -49,6 +52,7 @@ class _ChatViewState extends State<ChatView> {
         autoCloseDuration: const Duration(seconds: 3),
       );
     });
+   
   }
 
   @override
@@ -98,8 +102,7 @@ class _ChatViewState extends State<ChatView> {
                   child: Markdown(
                     shrinkWrap: true,
                     data: responseText,
-                    controller: controller, 
-                  
+                    controller: controller,
                   ),
                 ),
                 SizedBox(height: 16.v),

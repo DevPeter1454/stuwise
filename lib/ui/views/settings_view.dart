@@ -1,9 +1,7 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:stuwise/core/service/firebase_auth_service.dart';
 import 'package:stuwise/core/service/firebase_firestore_service.dart';
 import 'package:stuwise/ui/constants/exports.dart';
-import 'package:stuwise/ui/views/startup_view.dart';
 import 'package:stuwise/ui/widgets/custom_text_button.dart';
 
 class SettingsView extends StatefulWidget {
@@ -124,7 +122,7 @@ class ProfileDetailWidget extends StatelessWidget {
               value,
               style: kHeading1TextStyle.copyWith(
                   overflow: TextOverflow.ellipsis,
-                  fontSize: 24.fsize,
+                  fontSize: 18.fsize,
                   color: AppColors.kTextDefaultColor),
             ),
           ),

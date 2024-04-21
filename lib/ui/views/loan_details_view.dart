@@ -4,7 +4,10 @@ import 'package:stuwise/ui/constants/exports.dart';
 
 class LoanDetailsView extends StatefulWidget {
   final Loan loan;
-  const LoanDetailsView({super.key, required this.loan, });
+  const LoanDetailsView({
+    super.key,
+    required this.loan,
+  });
 
   @override
   State<LoanDetailsView> createState() => _LoanDetailsViewState();
@@ -66,11 +69,17 @@ class _LoanDetailsViewState extends State<LoanDetailsView> {
                       cells: [
                         DataCell(Text(payment.month.toString())),
                         DataCell(Text(
-                            '${widget.loan.currency}${payment.principalPayment.toStringAsFixed(2)}')),
+                          '${widget.loan.currency}${payment.principalPayment.toStringAsFixed(2)}',
+                          style: kSmallRegularTextStyle,
+                        )),
                         DataCell(Text(
-                            '${widget.loan.currency}${payment.interestPayment.toStringAsFixed(2)}')),
+                          '${widget.loan.currency}${payment.interestPayment.toStringAsFixed(2)}',
+                          style: kSmallRegularTextStyle,
+                        )),
                         DataCell(Text(
-                            '${widget.loan.currency}${payment.remainingBalance.toStringAsFixed(2)}')),
+                          '${widget.loan.currency}${payment.remainingBalance.toStringAsFixed(2)}',
+                          style: kSmallRegularTextStyle,
+                        )),
                       ],
                     );
                   }).toList(),
