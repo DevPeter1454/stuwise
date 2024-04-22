@@ -1,4 +1,4 @@
-# stuwise
+# Stuwise Loan Repayment Planner
 
 A new Flutter project.
 
