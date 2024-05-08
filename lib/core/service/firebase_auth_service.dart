@@ -1,9 +1,9 @@
 // ignore_for_file: use_build_context_synchronously
 
+import 'dart:async';
+
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
-import 'package:stuwise/core/service/firebase_firestore_service.dart';
 import 'package:toastification/toastification.dart';
 
 class FirebaseAuthService {
@@ -15,7 +15,7 @@ class FirebaseAuthService {
 
   Stream<User?> get currentStream => _firebaseAuth.authStateChanges();
 
-  Future<void> signOut({required BuildContext context}) async {
+  FutureOr<void> signOut({required BuildContext context}) async {
     await _firebaseAuth.signOut();
     toastification.show(
       context: context,
@@ -27,7 +27,7 @@ class FirebaseAuthService {
     );
   }
 
-  Future<void> signInWithEmailAndPassword(
+  FutureOr<dynamic> signInWithEmailAndPassword(
       {required String email,
       required String password,
       required BuildContext context}) async {
@@ -44,6 +44,7 @@ class FirebaseAuthService {
           autoCloseDuration: const Duration(seconds: 3),
         );
       }
+      return result;
     } on FirebaseAuthException catch (e) {
       switch (e.code) {
         case 'user-not-found':
@@ -82,7 +83,7 @@ class FirebaseAuthService {
     }
   }
 
-  Future<dynamic> createUserWithEmailAndPassword({
+  FutureOr<dynamic> createUserWithEmailAndPassword({
     required String email,
     required String password,
     required BuildContext context,
@@ -103,7 +104,8 @@ class FirebaseAuthService {
             autoCloseDuration: const Duration(seconds: 3),
           );
 
-          break;
+          return null;
+
         case 'weak-password':
           toastification.show(
             context: context,
@@ -114,7 +116,8 @@ class FirebaseAuthService {
             autoCloseDuration: const Duration(seconds: 3),
           );
 
-          break;
+          return null;
+
         default:
           toastification.show(
             context: context,
@@ -124,6 +127,7 @@ class FirebaseAuthService {
             title: Text(e.toString()),
             autoCloseDuration: const Duration(seconds: 3),
           );
+          return null;
       }
     }
   }

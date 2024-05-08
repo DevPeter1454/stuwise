@@ -1,5 +1,7 @@
 // ignore_for_file: use_build_context_synchronously
 
+import 'dart:async';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:stuwise/core/models/loan_class.dart';
@@ -50,7 +52,7 @@ class FirebaseFireStoreService {
     }
   }
 
-  Future<dynamic> getUserDetails(BuildContext context) async {
+  FutureOr<dynamic> getUserDetails(BuildContext context) async {
     try {
       final documentSnapshot =
           await _firebaseFirestore.collection('users').get();
@@ -80,7 +82,7 @@ class FirebaseFireStoreService {
         .snapshots();
   }
 
-  Future<dynamic> saveNewLoan(
+  FutureOr<dynamic> saveNewLoan(
       Loan loan, BuildContext context, String name) async {
     try {
       final loanDetails = <String, dynamic>{

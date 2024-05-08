@@ -73,14 +73,8 @@ class _SettingsViewState extends State<SettingsView> {
                 ProfileDetailWidget(value: "${userDetails['email']}"),
                 SizedBox(height: 16.v),
                 CustomButton(
-                    onPressed: () {
-                      _firebaseAuthService
-                          .signOut(context: context)
-                          .whenComplete(() {
-                        Navigator.pop(
-                          context,
-                        );
-                      });
+                    onPressed: () async{
+                      await _firebaseAuthService.signOut(context: context);
                     },
                     text: "Log Out",
                     size: Size(MediaQuery.of(context).size.width, 60),

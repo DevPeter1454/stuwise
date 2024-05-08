@@ -1,6 +1,5 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:stuwise/core/models/loan_class.dart';
 import 'package:stuwise/core/models/loan_result.dart';
 import 'package:stuwise/ui/constants/exports.dart';

@@ -3,7 +3,6 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:stuwise/core/service/firebase_auth_service.dart';
 import 'package:stuwise/core/service/firebase_firestore_service.dart';
 import "package:stuwise/ui/constants/exports.dart";
-import 'package:stuwise/ui/views/loan_calc_view.dart';
 
 class HomeView extends StatefulWidget {
   const HomeView({super.key});
